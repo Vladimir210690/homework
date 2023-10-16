@@ -1,73 +1,75 @@
 #include <iostream>
-#include <ctime>
 
 using namespace std;
 
 int main()
+
 {
 	setlocale(LC_ALL, "RUS");
-	srand(time(NULL));
 
-	char name1 = 'o'; // Имя первого игрока
-	char name2 = 'o'; // Имя второго игрока
+	char znak = 0;
+	double a = 0;
+	double b = 0;
 
-	int a = 0; // Значение хода первого игрока
-	int b = 0; // Значение хода второго игрока
 
-	int c = 0; // Счет первого игрока
-	int d = 0; // Счет второго игрока
 
-	int e = 0;
-	int j = 0;
-
-	cout << "Игра рандом. Каждый игрок по очереди генерирует собственное число от 0 до 10.\n";
-	cout << "Побеждает тот, чье число окажется больше. Победителю присваивается одно очко, игра до 10 очков\n\n";
-
-	cout << "Первый игрок, введите свое имя: " << endl;
-	cin >> name1;
-	cout << "Второй игрок, введите свое имя: " << endl;
-	cin >> name2;
-
-	cout << "Игра начинается: " << endl << endl;
-
-	while ((c != 3) && (d != 3))
+	for (;znak != 'o';)
 	{
-		cout << "Игрок " << name1 << " Нажмите 0 и Enter" << endl;
-		cin >> e;
-		a = rand() % 100;
-		cout << "Ваше число: " << a << endl;
+		cout << "Укажите знак +,-,*,/: ";
+		cin >> znak;
 
-		cout << "Игрок_ " << name2 << " Нажмите 0 и Enter" << endl;
-		cin >> j;
-		b = rand() % 100;
-		cout << "Ваше число: " << b << endl;
+			switch (znak)
+			{
+			case '+':
+				cout << "Введите первое число: " << endl;
+				cin >> a;
+				cout << "Введите второе число: " << endl;
+				cin >> b;
+				cout << "Результат: " << a + b << endl;
+				break;
 
-		if (a > b)
-		{
-			c++;
-		}
-		else if (a == b)
-		{
-			cout << "В этом туре ничья, играем дальше:\n";
-		}
+			case '-':
+				cout << "Введите первое число: " << endl;
+				cin >> a;
+				cout << "Введите второе число: " << endl;
+				cin >> b;
+				cout << "Результат: " << a - b << endl;
+				break;
 
-		else
-		{
-			d++;
-		}
+			case '*':
+				cout << "Введите первое число: " << endl;
+				cin >> a;
+				cout << "Введите второе число: " << endl;
+				cin >> b;
+				cout << "Результат: " << a * b << endl;
+				break;
 
-		cout << "Счет: " << c << "/" << d << endl;
+			case '/':
+				cout << "Введите первое число: " << endl;
+				cin >> a;
+				cout << "Введите второе число: " << endl;
+				cin >> b;
+				if (b == 0)
+				{
+					cout << "Невозможно делить на 0" << endl;
+				}
+				else
+				{
+					cout << "Результат: " << a / b << endl;
+				}
+				break;
+
+			case '%':
+				cout << "Введите первое число: " << endl;
+				cin >> a;
+				cout << "Введите второе число: " << endl;
+				cin >> b;
+				cout << "Результат: " << (int)a % (int)b << endl;
+				break;
+			}
+
 	}
+	cout << "Программа завершена";
 
-	cout << "Общий счет: " << endl << "Игрок " << name1 << ": " << c << endl << "Игрок " << name2 << ": " << d << endl;
-
-	if (c > d)
-	{
-		cout << "Победил игрок: " << name1 << endl;
-	}
-	else
-	{
-		cout << "Победил игрок: " << name2 << endl;
-	}
 	return 0;
 }
