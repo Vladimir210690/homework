@@ -17,7 +17,7 @@ int main()
 		keis[h] = j;
 	}
 
-	cout << "\nÌàññèâ çàãğóæåí! " << endl << endl;
+	cout << "ĞœĞ°ÑÑĞ¸Ğ² Ğ·Ğ°Ğ³Ñ€ÑƒĞ¶ĞµĞ½! " << endl << endl;
 
 	for (int h = 0; h < SAW; h++)
 	{
