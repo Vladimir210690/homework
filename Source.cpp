@@ -2,52 +2,74 @@
 
 using namespace std;
 
+float SUM(float a, float b)
+{
+	return a + b;
+} 
+float SUB(float a, float b)
+{
+	return a - b;
+}
+float MUL(float a, float b)
+{
+	return a * b;
+}
+float DIV(float a, float b)
+{
+	if (b == 0)
+	{
+		cout << "Ошибка, нельзя делить на 0 " << endl;
+	}
+	else
+		return a / b;
+}
+
+
 int main()
 {
 	setlocale(LC_ALL, "RU");
 
-	const int ROW = 3;
-	const int COL = 4;
+	float a = 0;
+	float b = 0;
+	char c = 'y';
 
-	int arr[ROW][COL];
-
-	cout << "Заполняем числами двухмерный массив: " << endl << endl;
-
-	for (int a = 0; a < ROW; a++)
+	while (c != 'o')
 	{
-		for (int b = 0; b < COL; b++)
+		cout << "Укажите действие: '+', '-','*','/' и нажмите ввод: " << endl;
+		cin >> c;
+
+		if (c == 'o')
 		{
-			cin >> arr[a][b]; // можно использовать команду rand() для автоматического заполнения массива
+			break;
 		}
-	}
-
-	cout << "Выводим числа из массива: " << endl << endl;
-
-	for (int a = 0; a < ROW; a++)
-	{
-		for (int b = 0; b < COL; b++)
+		else
 		{
-			cout << arr[a][b] << endl;
+			cout << "Введите первое число: " << endl;
+			cin >> a;
+			cout << "Введите второе число: " << endl;
+			cin >> b;
 		}
-	}
+		switch (c)
+		{
+		case 'o':
+			break;
+		case '+':
+			cout << SUM(a, b) << endl;
+			break;
+		case '-':
+			cout << SUB(a, b) << endl;
+			break;
+		case '*':
+			cout << MUL(a, b) << endl;
+			break;
+		case '/':
+			cout << DIV(a, b) << endl;
+			break;
+		}
 
-	// Создание и инициализация двухмерного массива вручную
+	} 
 
-	const int RAZ = 4;
-	const int NIZ = 10;
-
-	char name[RAZ][NIZ]
-	{
-		{'V','l','a','d','i','m','i','r'},
-	    {'D', 'a', 'r', 'i', 'a'},
-		{'N','i','c','o','l','a','y'},
-		{'K','r','i','s','t','i','n','a'},
-	};
-
-	cout << name[0] << endl;
-	cout << name[1] << endl;
-	cout << name[2] << endl;
-	cout << name[3] << endl;
+	cout << "Сумма чисел равна: " << SUM(a, b) << endl;
 
 	return 0;
 }
