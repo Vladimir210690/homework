@@ -4,48 +4,50 @@ using namespace std;
 
 int main()
 {
-	setlocale(LC_ALL, "RUS");
-	const int DATA = 10;
-	int age[DATA];
-	char name[DATA];
+	setlocale(LC_ALL, "RU");
 
-	cout << "РќР°РїРёС€РёС‚Рµ РІР°С€Рµ РёРјСЏ: " << endl;
-	cin >> name;
+	const int ROW = 3;
+	const int COL = 4;
 
-	for (int c = 0; c < DATA; c++)
+	int arr[ROW][COL];
+
+	cout << "Заполняем числами двухмерный массив: " << endl << endl;
+
+	for (int a = 0; a < ROW; a++)
 	{
-		switch (c)
+		for (int b = 0; b < COL; b++)
 		{
-		case 0:
-			cout << "РЎРєРѕР»СЊРєРѕ РІР°Рј Р»РµС‚? " << endl;
-			cin >> age[c];
-			break;
-		case 1:
-			cout << "РљР°РєРѕР№ РІР°С€ СЂРѕСЃС‚ РІ СЃР°РЅС‚РёРјРµС‚СЂР°С…? " << endl;
-			cin >> age[c];
-			break;
-		case 2:
-			cout << "РљР°РєРѕР№ РІР°С€ РІРµСЃ РІ РєРёР»РѕРіСЂР°РјРјР°С…? " << endl;
-			cin >> age[c];
-			break;
-		case 3:
-			cout << "РљР°РєРѕР№ РІР°С€ Р·Р°СЂР°Р±РѕС‚РѕРє РІ СЂСѓР±Р»СЏС…? " << endl;
-			cin >> age[c];
-			break;
-		case 4:
-			cout << "РљР°РєРѕР№ РІР°С€ СЃС‚Р°Р¶ СЂР°Р±РѕС‚С‹ РІ РїСЂРѕС„РµСЃСЃРёРё? " << endl;
-			cin >> age[c];
-			break;
+			cin >> arr[a][b]; // можно использовать команду rand() для автоматического заполнения массива
 		}
 	}
-	cout << "Р РµР·СѓР»СЊС‚Р°С‚С‹ РёСЃСЃР»РµРґРѕРІР°РЅРёСЏ: " << endl << endl;
 
-	cout << "РРјСЏ РёСЃСЃР»РµРґСѓРµРјРѕРіРѕ: " << name << endl;
-	cout << "Р’РѕР·СЂР°СЃС‚ РёСЃСЃР»РµРґСѓРµРјРѕРіРѕ: " << age[0] << " Р»РµС‚" << endl;
-	cout << "Р РѕСЃС‚ РёСЃСЃР»РµРґСѓРµРјРѕРіРѕ: " << age[1] << " СЃРј" << endl;
-	cout << "Р’РµСЃ РёСЃСЃР»РµРґСѓРµРјРѕРіРѕ: " << age[2] << " РєРі" << endl;
-	cout << "Р”РѕС…РѕРґ РёСЃСЃР»РµРґСѓРµРјРѕРіРѕ: " << age[3] << " СЂСѓР±" << endl;
-	cout << "РЎС‚Р°Р¶ СЂР°Р±РѕС‚С‹ РёСЃСЃР»РµРґСѓРµРјРѕРіРѕ: " << age[4] << " Р»РµС‚" << endl;
+	cout << "Выводим числа из массива: " << endl << endl;
+
+	for (int a = 0; a < ROW; a++)
+	{
+		for (int b = 0; b < COL; b++)
+		{
+			cout << arr[a][b] << endl;
+		}
+	}
+
+	// Создание и инициализация двухмерного массива вручную
+
+	const int RAZ = 4;
+	const int NIZ = 10;
+
+	char name[RAZ][NIZ]
+	{
+		{'V','l','a','d','i','m','i','r'},
+	    {'D', 'a', 'r', 'i', 'a'},
+		{'N','i','c','o','l','a','y'},
+		{'K','r','i','s','t','i','n','a'},
+	};
+
+	cout << name[0] << endl;
+	cout << name[1] << endl;
+	cout << name[2] << endl;
+	cout << name[3] << endl;
 
 	return 0;
 }
