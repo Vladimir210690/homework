@@ -2,74 +2,83 @@
 
 using namespace std;
 
-float SUM(float a, float b)
+bool gameover; // переменная отвечает за выигрыш - проигрыш
+const int width = 40; // ширина экрана
+const int heigth = 20; // высота экрана
+int x, y, fruitX, fruitY,score; // координаты змейки, координаты фруктов и счет
+enum motion {STOP = 0, LEFT, RIGHT, UP, DOWN}; // создаем список команд и помещаем в одну переменную
+motion run;
+
+void Setup() // функция для настроек нужных параметров игры
 {
-	return a + b;
-} 
-float SUB(float a, float b)
-{
-	return a - b;
-}
-float MUL(float a, float b)
-{
-	return a * b;
-}
-float DIV(float a, float b)
-{
-	if (b == 0)
-	{
-		cout << "Ошибка, нельзя делить на 0 " << endl;
-	}
-	else
-		return a / b;
+	gameover = false; // задаем по умолчанию что мы еще не проиграли
+	run = STOP; // задаем команду остановки игры
+	x = width / 4; // задаем изначально центральное положение змейки
+	y = heigth / 2 + 9; // задаем изначально центральное положение змейки
+	fruitX = rand() % width; // задаем рандомное появление фруктов
+	fruitY = rand() % heigth; // задаем рандомное появление фруктов
+	score = 0; // изначально задаем нулевой счет
 }
 
+void Draw() // функция для рисования карты
+{
+	system("cls"); // каждый раз очищает терминал при вызове этой функции
+	for (int a = 0; a < width; a++) // рисуем в цикле границы игры
+	{
+		cout << "#";
+	}
+	cout << endl;
+
+	for (int b = 0; b < heigth; b++)
+	{
+		for (int c = 0; c < width; c++)
+		{
+			if (c == 0 || c == width - 1)
+			{
+				cout << "#";
+			}
+			else if (b == x && c == y)
+			{
+				cout << "0";
+			}
+			else if (b == fruitX && c == fruitY)
+			{
+				cout << "*";
+			}
+			else
+			{
+				cout << " ";
+			}
+			
+		}
+		cout << endl;
+	}
+
+	for (int i = 0; i < width; i++) // рисуем в цикле границы игры
+	{
+		cout << "#";
+	}
+	cout << endl;
+}
+
+void Input() // функция отслеживающая все нажатия от пользователя
+{
+
+}
+
+void Logik() // функция отвечающая за логику игры
+{
+
+}
 
 int main()
 {
-	setlocale(LC_ALL, "RU");
-
-	float a = 0;
-	float b = 0;
-	char c = 'y';
-
-	while (c != 'o')
+	Setup();
+	while (!gameover) // вызываем все функции в цикле, они будут выводиться, пока игра не закончиться
 	{
-		cout << "Укажите действие: '+', '-','*','/' и нажмите ввод: " << endl;
-		cin >> c;
-
-		if (c == 'o')
-		{
-			break;
-		}
-		else
-		{
-			cout << "Введите первое число: " << endl;
-			cin >> a;
-			cout << "Введите второе число: " << endl;
-			cin >> b;
-		}
-		switch (c)
-		{
-		case 'o':
-			break;
-		case '+':
-			cout << SUM(a, b) << endl;
-			break;
-		case '-':
-			cout << SUB(a, b) << endl;
-			break;
-		case '*':
-			cout << MUL(a, b) << endl;
-			break;
-		case '/':
-			cout << DIV(a, b) << endl;
-			break;
-		}
-
-	} 
-
-	cout << "Сумма чисел равна: " << SUM(a, b) << endl;
-
+		Draw();
+		Input();
+		Logik();
+	}
 	return 0;
 }
