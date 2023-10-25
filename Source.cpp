@@ -1,217 +1,180 @@
-﻿/*Написать программу, реализующую процедуры заказа и
-расчета его суммы в мини — пиццерии.В меню пиццерии
-предусмотрено 4 вида пиццы и три вида напитков.
-
-Пользователю выводится меню(вначале пиццы, потом
-напитки), содержащее код и название.Пользователь вводит
-код желаемого продукта, после чего вводит количество единиц
-данного продукта.
-
-В пиццерии предусмотрены два вида скидок :
-■ если общая сумма заказа более 50$, то размер скидки составляет 20 % от суммы заказа;
-■ каждая пятая пицца — в подарок;
-■ для напитков с ценой более 2$, если количество в заказе более трех, то скидка 15 % (только на напитки, а не на
-весь заказ).
-
-Вывести пользователю чек для оплаты, в виде: название, количество, цена , итого к оплате*/
-
 #include <iostream>
+#include <ctime>
+#include <conio.h>
 
 using namespace std;
 
-int order1 = 0; // Создаем переменные для хранения кода заказа
-int order2 = 0;
-int order3 = 0;
-int order4 = 0;
-int order5 = 0;
-int order6 = 0;
-int order7 = 0;
+const int ROW = 20;
+const int COL = 40;
 
-int priceP = 6; // Присваиваем цену каждой пицце
-int priceC = 7;
-int priceV = 7;
-int priceM = 8;
+int x = 0;
+int y = 0;
+int fruX = 0;
+int fruY = 0;
+int tallX[100]; 
+int tallY[100];
+int colT = 0; // ���������� ��������� � ������ ������
+bool gameOver = false;
+enum call { STOP = 0, LEFT, RIGHT, UP, DOWN };
+call run;
 
-int priceCo = 2; // Присваиваем цену каждому напитку
-int priceFa = 3;
-int priceSp = 3;
+int score = 0;
 
-int OrderPrice = 0; // Создаем переменные для хранения стоимости заказа
-int PizzaPrice = 0;
-int DrinckPrice = 0;
-int couP = 0; // Общее количество пиццы
-int couPD = 0;
-int bonP = 0; // Количество бонусной пиццы
-
-int colP = 0; // Создаем переменные для количества каждой позиции
-int colC = 0;
-int colV = 0;
-int colM = 0;
-int colCo = 0;
-int colFa = 0;
-int colSp = 0;
-
-int code = 0; // Создаем переменную для выбора кода каждой позиции
-
-
-void Menu()
+void Setup()
 {
-	cout << "Pizza: " << endl;
-	cout << "Pepperoni" << " code: " << 1 << " price: " << priceP << " $" << endl;
-	cout << "Cheese" << " code: " << 2 << " price: " << priceC << " $" << endl;
-	cout << "Veggie" << " code: " << 3 << " price: " << priceV << " $" << endl;
-	cout << "Meat" << " code: " << 4 << " price: " << priceM << " $" << endl << endl;
+	srand(time(NULL));
 
-	cout << "Drinks: " << endl;
-	cout << "Cola" << " code: " << 5 << " price: " << priceCo << " $" << endl;
-	cout << "Fanta" << " code: " << 6 << " price: " << priceFa << " $" << endl;
-	cout << "Sprite" << " code: " << 7 << " price: " << priceSp << " $" << endl << endl;
+	x = ROW / 2 - 1;
+	y = COL / 2 - 1;
+
+	fruX = rand() % ROW + 1;
+	fruY = rand() % COL + 1;
+}
+
+void Draw()
+{
+	system("cls");
+
+	for (int a = 0; a < COL; a++)
+	{
+		cout << "#";
+	}
+	cout << endl;
+
+	for (int b = 0; b < ROW; b++)
+	{
+		for (int c = 0; c < COL; c++)
+		{
+			if (c == 0 || c == 39)
+			{
+				cout << "#";
+			}
+			else if (b == x  && c == y)
+			{
+				cout << "0";
+			}
+			else if (b == fruX && c == fruY)
+			{
+				cout << "*";
+			}
+			else
+			{
+				bool h = false;
+
+				for (int d = 0; d < colT; d++)
+				{
+					if (tallX[d] == b && tallY[d] == c)
+					{
+						h = true;
+						cout << "o";
+					}
+				}
+				if (!h)
+				{
+					cout << " ";
+				}
+			}
+		}
+		cout << endl;
+	}
+
+	for (int a = 0; a < COL; a++)
+	{
+		cout << "#";
+	}
+	cout << endl;
 }
 
 void Input()
 {
-	while (code != 9)
+	if (_kbhit())
 	{
-		cout << "Inpud code product:  or 9 to check: " << endl;
-		cin >> code;
-
-		switch (code)
+		switch (_getch())
 		{
-		case 1:
-			cout << "Inpud count: " << endl;
-			cin >> colP;
-			order1 = code;
+		case 'a':
+			run = LEFT;
 			break;
-		case 2:
-			cout << "Inpud count: " << endl;
-			cin >> colC;
-			order2 = code;
+		case 'w':
+			run = UP;
 			break;
-		case 3:
-			cout << "Inpud count: " << endl;
-			cin >> colV;
-			order3 = code;
+		case 'd':
+			run = RIGHT;
 			break;
-		case 4:
-			cout << "Inpud count: " << endl;
-			cin >> colM;
-			order4 = code;
+		case 's':
+			run = DOWN;
 			break;
-		case 5:
-			cout << "Inpud count: " << endl;
-			cin >> colCo;
-			order5 = code;
-			break;
-		case 6:
-			cout << "Inpud count: " << endl;
-			cin >> colFa;
-			order6 = code;
-			break;
-		case 7:
-			cout << "Inpud count: " << endl;
-			cin >> colSp;
-			order7 = code;
+		case 'p':
+			gameOver = true;
 			break;
 		}
 	}
 }
 
-void Check()
+void Logik()
 {
-	if (order1 != 0)
-	{
-		cout << "You order Pizza: " << order1 << " Count: " << colP << " unit " << "Price: " << priceP * colP << " $" << endl;
-	}
-	if (order2 != 0)
-	{
-		cout << "You order Pizza: " << order2 << " Count: " << colC << " unit " << "Price: " << priceC * colC << " $" << endl;
-	}
-	if (order3 != 0)
-	{
-		cout << "You order Pizza: " << order3 << " Count: " << colV << " unit " << "Price: " << priceV * colV << " $" << endl;
-	}
-	if (order4 != 0)
-	{
-		cout << "You order Pizza: " << order4 << " Count: " << colM << " unit " << "Price: " << priceM * colM << " $" << endl;
-	}
-	if (order5 != 0)
-	{
-		cout << "You order Drink: " << order5 << " Count: " << colCo << " unit " << "Price: " << priceCo * colCo << " $" << endl;
-	}
-	if (order6 != 0)
-	{
-		cout << "You order Drink: " << order6 << " Count: " << colFa << " unit " << "Price: " << priceFa * colFa << " $" << endl;
-	}
-	if (order7 != 0)
-	{
-		cout << "You order Drink: " << order7 << " Count: " << colSp << " unit " << "Price: " << priceSp * colSp << " $" << endl;
-	}
-	
-}
+	int tx = tallX[0];
+	int ty = tallY[0];
+	int tx2 = 0;
+	int ty2 = 0;
 
-void Price()
-{
+	tallX[0] = x;
+	tallY[0] = y;
 
-	couP = colP + colC + colV + colM;
-	bonP = couP / 5;
+	for (int a = 0; a < colT; a++)
+	{
+		tx2 = tallX[a];
+		ty2 = tallY[a];
 
-	if (couP > 4)
-	{
-		PizzaPrice = ((colP * priceP) + (colC * priceC) + (colV * priceV) + (colM * priceM)) - (bonP * 7);
-		cout << "Pizza Price: " << PizzaPrice << " $" << endl;
-	}
-	else
-	{
-		PizzaPrice = (colP * priceP) + (colC * priceC) + (colV * priceV) + (colM * priceM);
-		cout << "Pizza Price: " << PizzaPrice << " $" << endl;
+		tallX[a] = tx;
+		tallY[a] = ty;
+
+		tx = tx2;
+		ty = ty2;
 	}
 
-	if (colFa > 3)
+	switch (run)
 	{
-		DrinckPrice = (colCo * priceCo) + ((colFa * priceFa)*0.85) + (colSp * priceSp);
-		cout << "Drinck Price: " << DrinckPrice << " $" << endl;
-	}
-	else if (colSp > 3)
-	{
-		DrinckPrice = (colCo * priceCo) + (colFa * priceFa) + ((colSp * priceSp) * 0.85);
-		cout << "Drinck Price: " << DrinckPrice << " $" << endl;
-	}
-	else if (colSp > 3 && colFa > 3)
-	{
-		DrinckPrice = (colCo * priceCo) + ((colFa * priceFa)* 0.85) + ((colSp * priceSp) * 0.85);
-		cout << "Drinck Price: " << DrinckPrice << " $" << endl;
-	}
-	else
-	{
-		DrinckPrice = (colCo * priceCo) + (colFa * priceFa) + (colSp * priceSp);
-		cout << "Drinck Price: " << DrinckPrice << " $" << endl;
-	}
-	
-
-	OrderPrice = PizzaPrice + DrinckPrice;
-
-	if (OrderPrice > 50)
-	{
-		OrderPrice = OrderPrice * 0.8;
-		cout << "Total price order = " << OrderPrice << " $" << endl;
-	}
-	else
-	{
-		cout << "Total price order = " << OrderPrice << " $" << endl;
+	case LEFT:
+		y--;
+		break;
+	case RIGHT:
+		y++;
+		break;
+	case UP:
+		x--;
+		break;
+	case DOWN:
+		x++;
+		break;
 	}
 
+	if ((x > ROW || x < 0) || (y > COL || y < 0))
+	{
+		gameOver = true;
+	}
+
+	if (x == fruX && y == fruY)
+	{
+		score++;
+		fruX = rand() % ROW + 1;
+		fruY = rand() % COL + 1;
+		colT++; // ������ ������ ����� - ��������� ���������� ��������� � �����
+	}
+	cout << "You game score: " << score << endl;
 }
 
 int main()
+
 {
-	setlocale(LC_ALL, "RUS");
+	Setup();
 
-	//Выводим собранные функции
-
-	Menu();
-	Input();
-	Check();
-	Price();
-
+	while (gameOver == false)
+	{
+		Draw();
+		Input();
+		Logik();
+	}
+	
+	cout << "Game Ower" << endl;
 	return 0;
 }
