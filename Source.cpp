@@ -13,7 +13,7 @@ int fruX = 0;
 int fruY = 0;
 int tallX[100]; 
 int tallY[100];
-int colT = 0; // Количество элементов в хвосте змейки
+int colT = 0; // РєРѕР»РёС‡РµСЃС‚РІРѕ РѕС‡РєРѕРІ
 bool gameOver = false;
 enum call { STOP = 0, LEFT, RIGHT, UP, DOWN };
 call run;
@@ -158,7 +158,7 @@ void Logik()
 		score++;
 		fruX = rand() % ROW + 1;
 		fruY = rand() % COL + 1;
-		colT++; // Сьедая каждый фрукт - добавляем количество элементов в хвост
+		colT++; // РїСЂРёР±Р°РІР»СЏРµРј РѕРґРЅРѕ РѕС‡РєРѕ
 	}
 	cout << "You game score: " << score << endl;
 }
