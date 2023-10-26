@@ -15,8 +15,8 @@ int tallX[100];
 int tallY[100];
 int colT = 0; // количество очков
 bool gameOver = false;
-enum call { STOP = 0, LEFT, RIGHT, UP, DOWN };
-call run;
+enum btns { STOP = 0, LEFT, RIGHT, UP, DOWN };
+btns run;
 
 int score = 0;
 
