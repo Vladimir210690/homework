@@ -120,7 +120,7 @@ void Logik()
 	tallX[0] = x;
 	tallY[0] = y;
 
-	for (int a = 0; a < colT; a++)
+	for (int a = 1; a < colT; a++)
 	{
 		tx2 = tallX[a];
 		ty2 = tallY[a];
