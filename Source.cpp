@@ -17,11 +17,9 @@ int gunY = ROW / 2;
 int gunX2 = COL / 2;
 int gunY2 = ROW / 2;
 
-//int missX = ROW - 19;
-//int missY = COL / 2;
 
-int enemyX = ROW - 20;
-int enemyY = rand() % COL;
+int enemyX = rand() % COL;
+int enemyY = ROW - 20;
 
 int score = 0;
 bool gameOwer = false;
@@ -46,20 +44,20 @@ void Draw()
             {
                 cout << "#";
             }
-            else if (c == x - 1 && b == y + 9 )
+            else if ((c == x - 1 || c == x + 1 || c == x) && (b == y + 9))
             {
                 cout << "#";
             }
      
-            else if (c == gunX - 1 && b == gunY + 8)
+            else if (c == gunX && b == gunY + 8)
             {
                 cout << "^";
             }
-            else if (c == gunX2 - 1 && b == gunY2 + 8)
+            else if (c == gunX2 && b == gunY2 + 8)
             {
                 cout << "^";
             }
-            else if (c == enemyY && b == enemyX)
+            else if (c == enemyX && b == enemyY)
             {
                 cout << "*";
             }
@@ -104,7 +102,7 @@ void Input() // функция отслеживающая все нажатия от пользователя
 
 void Logik() // функция отвечающая за логику игры
 {
-    enemyX++;
+    enemyY++;
     gunY--;
 
     switch (run)
@@ -119,29 +117,31 @@ void Logik() // функция отвечающая за логику игры
         gunX++;
         gunX2++;
         break;
- /*   case UP:
-        gunY--;
-        break;*/
-    /*case DOWN:
-       ;
-        break;*/
     }
+
     if (gunY == - 10)
     {
         gunY = 10;
     }
-  
-    if ((gunX == enemyX && gunY == enemyY) || (gunX2 == enemyX && gunY2 == enemyY))
+    if (enemyY == 21)
+    {
+        enemyX = rand() % COL;
+        enemyY = ROW - 20;
+    }
+    else if ((enemyY == gunY && enemyX == gunX) || (enemyY == gunY2 && enemyX == gunX2))
+    {
+        score = score + 5;
+        enemyX = rand() % COL;
+        enemyY = ROW - 20;
+    }
+    else if (enemyY == y + 9 && (enemyX == x || enemyX == x - 1 || enemyX == x + 1))
     {
         score++;
-        enemyX = ROW - 20;
-        enemyY = rand() % COL;
+        enemyX = rand() % COL;
+        enemyY = ROW - 20;
     }
-    if (enemyX == 20)
-    {
-        enemyX = ROW - 20;
-        enemyY = rand() % COL;
-    }
+   
+
     cout << "Score: " << score << endl;
 }
 
