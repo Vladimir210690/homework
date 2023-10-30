@@ -9,10 +9,10 @@ int main()
 	int row = 0;
 	int col = 0;
 
-	cout << "Ââåäèòå êîëè÷åñòâî ñòðî÷åê" << endl;
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÑ‚Ñ€Ð¾Ðº" << endl;
 	cin >> row;
 
-	cout << "Ââåäèòå êîëè÷åñòâî ñòîëáöîâ" << endl;
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÐºÐ¾Ð»Ð¾Ð½Ð¾Ðº" << endl;
 	cin >> col;
 
 	for (int a = 0; a < col; a++)
@@ -21,7 +21,7 @@ int main()
 	}
 	cout << endl;
 
-	for (int b = 0; b < row; b++)
+	for (int b = 0; b < row - 2; b++)
 	{
 		for (int c = 0; c < col; c++)
 		{
