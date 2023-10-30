@@ -17,7 +17,7 @@ int gunY = ROW / 2;
 int gunX2 = COL / 2;
 int gunY2 = ROW / 2;
 
-
+bool gameOver = false;
 int enemyX = rand() % COL;
 int enemyY = ROW - 20;
 
@@ -26,7 +26,7 @@ bool gameOwer = false;
 enum qwe { STOP = 0, FIRE , LEFT, RIGHT, UP, DOWN };
 qwe run;
 
-void Draw()
+void Draw() // Р¤СѓРЅРєС†РёСЏ РѕС‚СЂРёСЃРѕРІРєРё РёРіСЂРѕРІРѕРіРѕ РїРѕР»СЏ
 {
     system("cls");
 
@@ -77,7 +77,7 @@ void Draw()
 }
 
 
-void Input() // функция отслеживающая все нажатия от пользователя
+void Input() // Р¤СѓРЅРєС†РёСЏ РѕС‚СЃР»РµР¶РёРІР°РЅРёСЏ РІРІРѕРґР° СЃ РєР»Р°РІРёР°С‚СѓСЂС‹
 {
     if (_kbhit())
     {
@@ -100,7 +100,7 @@ void Input() // функция отслеживающая все нажатия от пользователя
     }
 }
 
-void Logik() // функция отвечающая за логику игры
+void Logik() // Р¤СѓРЅРєС†РёСЏ Р»РѕРіРёРєРё 
 {
     enemyY++;
     gunY--;
