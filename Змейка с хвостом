@@ -61,7 +61,7 @@ void Draw()
 			{
 				bool h = false;
 
-				for (int d = 0; d < colT; d++)
+				for (int d = 0; d < colT; d++) // Отрисовка хвоста
 				{
 					if (tallX[d] == b && tallY[d] == c)
 					{
