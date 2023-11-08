@@ -1,0 +1,188 @@
+#include <iostream>
+#include <conio.h>
+#include <windows.h>
+using namespace std;
+int row = 20;
+int col = 40;
+bool gameOwer = false;
+
+int tailX[50];
+int tailY[50];
+int ntail = 0;
+
+int x = col / 2;
+int y = row / 2;
+int frx = rand() % col;
+int fry = rand() % row;
+int score = 0;
+enum btns {STOP = 0, LEFT, RIGHT, UP, DOWN};
+btns run;
+
+void Draw()
+{
+	system("cls");
+	for (int i = 0; i < col; i++)
+	{
+		cout <<"#";
+	}
+	cout << endl;
+	
+	for (int i = 0; i < row;  i++)
+	{
+		for (int j = 0; j <  col; j++)
+		{
+			if (j == 0 || j == col - 1)
+			{
+				cout << "#";
+			}
+			else if (j == x && i == y)
+			{
+				cout << "0";
+			}
+			else if (j == frx && i == fry)
+			{
+				cout << "*";
+			}
+			else
+			{
+				bool prin = false;
+				for (int z = 0; z < ntail; z++)
+				{
+					if (tailX[z] == j && tailY[z] == i)
+					{
+						prin = true;
+						cout  << "o";
+					}
+				}
+				 if (!prin)
+				 {
+				 	cout << " ";
+				 }
+			}
+		}
+		cout << endl;
+	}
+	
+	for (int i = 0; i < col; i++)
+	{
+		cout << "#";
+	}
+	cout << endl;
+}
+
+void Input ()
+{
+	if (_kbhit())
+	{
+		switch (_getch())
+		{
+			case 'a':
+			run = LEFT;
+			break;
+			case 'd':
+			run = RIGHT;
+			break;
+			case 'w':
+			run = UP;
+			break;
+			case 's':
+			run = DOWN;
+			break;
+		}
+	}
+}
+
+void Logik ()
+{
+	int prevX = tailX[0];
+	int prevY = tailY[0];
+	int prev2x = 0;
+	int prev2y = 0;
+	tailX[0] = x;
+	tailY[0] = y;
+	
+	for (int c = 1; c < ntail; c++)
+	{
+		prev2x = tailX[c];
+		prev2y = tailY[c];
+		tailX[c] = prevX;
+		tailY[c] = prevY;
+		prevY = prev2y;
+		prevX = prev2x;
+	}
+	
+	switch (run)
+	{
+		case LEFT:
+		x--;
+		break;
+		case RIGHT:
+		x++;
+		break;
+		case UP:
+		y--;
+		break;
+		case DOWN:
+		y++;
+		break;
+	}
+	if (x == 0)
+	{
+		x = 40;
+	}
+	else if (x == 41)
+	{
+		x = 1;
+	}
+	else if (y == -1)
+	{
+		y = 20;
+	}
+	else if (y == 21)
+	{
+		y = 0;
+	}
+	
+	if (x == frx && y == fry)
+	{
+		ntail++;
+		score += 10;
+		frx = rand() % col;
+		fry = rand() % row;
+	}
+	cout << "Score: " << score << endl;
+	
+	for (int f = 0; f < ntail; f ++)
+	{
+		if (tailX[f] == x && tailY[f] == y)
+		{
+			gameOwer = true;
+		}
+	}
+}
+
+int main ()
+{
+	while (!gameOwer)
+	{
+		Sleep(300);
+		Draw();
+		Input();
+		Logik();
+		if (score == 200)
+		{
+			gameOwer = true;
+		}
+	}
+	if (score == 200)
+	{
+		cout << "You win!" << endl;
+	}
+	else
+	{
+		cout << "You lose" << endl;
+	}
+	
+	return 0;
+	
+}
