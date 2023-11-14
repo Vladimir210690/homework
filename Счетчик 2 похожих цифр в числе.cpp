@@ -23,7 +23,7 @@ int main() {
 		two1 = three1 / 10;
 		one = two1 % 10;
 		
-		if (three == two || three == one) {
+		if (three == two || three == one || two == one) {
 			cout << i << endl;
 			col++;
 		}
