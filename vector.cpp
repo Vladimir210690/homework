@@ -15,7 +15,6 @@ int main() {
     }
     cout << endl;
   
-
     // Доступ к элементам вектора
 
     for (int i = 0; i < arr.size(); i++) {
