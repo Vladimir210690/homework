@@ -1,55 +1,61 @@
-#include <stdio.h>
-#include <windows.h>
-#include <math.h>
-#include <stdlib.h>
+//Написать программу, реализующую сортировку
+//массива с помощью усовершенствованной
+//сортировки пузырьковым методом.
+//Усовершенствование состоит в том, чтобы
+//анализировать количество перестановок на каждом
+//шагу, если это количество равно нулю, то продолжать
+//сортировку нет смысла — массив отсортирован.
 
-#define _weigths 3 // Константа хранящая количество весов
 
-double w[_weigths]; // Массив для весов
+#include <iostream>
+#include <ctime>
 
-double Activate(double a) { //Функция активации
-	return (a <= 0) ? 0 : 1;
-}
+using namespace std;
 
-double RightProp(double input[3]) { // Функция вычисления
-	double res = 0; // Переменная хранящая результат рассчетов
-	for (int i = 0; i < 3; i++) {
-		res += w[i] * input[i];
+int main() {
+	setlocale(LC_ALL, "Russian");
+	srand(time(NULL));
+
+	const int SIZE = 10;
+	int bubble[SIZE]{};
+
+	bool flag = false;
+	int col = 0;
+	int iter = 0;
+
+	for (int i = 0; i < SIZE; i++) {
+		bubble[i] = rand() % 100;
+		cout << bubble[i] << " ";
 	}
-	return res;
-}
+	cout << endl << endl;
 
-void Train(int data[4][3], int exp[4]) {
-	const double LR = 0.1, EPOCH = 50;
-
-	int d, i, n;
-	double error;
-
-	for (int i = 0; i < EPOCH; i++) {
-		for (int j = 0; j < 4; j++) {
-			error = exp[j] - Activate(RightProp((double*)data[j]));
-			for (int n = 0; n < _weigths; n++) {
-				w[n] += LR * error * data[j][n];
+	for (int i = 0; i < SIZE; i++) {
+		for (int j = 0; j < SIZE - 1; j++) {
+			if (bubble[j] > bubble[j + 1]) {
+				swap(bubble[j], bubble[j + 1]);
+			}
+			else if (bubble[j] < bubble[j + 1]) {
+				col += 1;
+			}
+			iter += 1;
+			cout << col << " ";
+			if (col == 9) {
+				flag = true;
+				break;
 			}
 		}
+		col = 0;
+		if (flag == true) {
+			break;
+		}
+	
 	}
-}
+	cout << "Количество пробегов = " << iter << endl << endl;
 
-int main(int argc, char* argv[]) {
-	int traningdata[4][3]{ {0,0,1},{0,1,1},{1,0,1},{0,1,0} };
-	int expresultr[4]{ 0,0,1 };
-	int i;
-	srand(1);
-
-	for (int i = 0; i < 3; i++) {
-		w[i] = fmod(rand() % 100000000 * 0.1, 1.05);
-	}
-	Train(traningdata, expresultr);
-
-	for (int i = 0; i < 3; i++) {
-		w[i] = (w[i] > 0) ? w[i] : 0;
+	for (int i = 0; i < SIZE; i++) {
+		cout << bubble[i] << " ";
 	}
 
-	double arr[3]{ 1,1,0 };
-	printf("%.1f", Activate(RightProp(arr)));
+
+	return 0;
 }
