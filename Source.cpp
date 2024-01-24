@@ -1,55 +1,53 @@
 #include <iostream>
-#include <ctime>
 #include <string>
 
 using namespace std;
-
-struct NODE { // Создаем ячейку списка
-	int number;
+struct Nota {
+	int age;
 	string name;
-	NODE* next;
+	Nota* next;
+};
+struct Head {
+	int size;
+	Nota* first;
 };
 
-struct List { // Создаем голову списка
-	int col;
-	NODE* first;
-};
 
-void push_beak(List* lst, int col) { // Создаем функцию добавления новой ячейки
-	string go;
-	NODE* node = new NODE;
-	node->number = col;
-	cin >> go;
-	node->name = go;
-	node->next = lst->first;
-	lst->first = node;
-	lst->col++;
+
+void push_front(Head* a) {
+	int b = 0;
+	string name;
+	cout << "Enter you name: ";
+	cin >> name;
+	cout << "Enter you age: ";
+	cin >> b;
+		
+
+	Nota* pntr = new Nota;
+	pntr->age = b;
+	pntr->name = name;
+	pntr->next = a->first;
+	a->first = pntr;
+	a->size++;
 }
 
-void print(List* lst) { // Создаем функцию вывода всех ячеек списка
-	NODE* node = lst->first;
-	while (node != nullptr) {
-		cout << node->number << "\t" << node->name << endl;
-		node = node->next;
+void print(Head* a) {
+	Nota* note = a->first;
+	while (note != nullptr) {
+		cout << note->name << "\t" << note->age << endl;
+		note = note->next;
 	}
-
 }
 
 int main() {
-	srand(time(NULL));
-
+	Head list;
+	list.size = 0;
+	list.first = nullptr;
 	int run = 5;
-	List head;
-	head.col = 0;
-	head.first = nullptr;
-
 	for (int i = 0; i < run; i++) {
-		push_beak(&head, rand() % 100);
-		
+		push_front(&list);
 	}
 
-	print(&head);
-	
-
+	print(&list);
 	return 0;
 }
