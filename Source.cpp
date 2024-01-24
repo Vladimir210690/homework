@@ -4,18 +4,18 @@
 
 using namespace std;
 
-struct NODE { // Ñîçäàåì ÿ÷åéêó ñïèñêà
+struct NODE { // Ð¡Ð¾Ð·Ð´Ð°ÐµÐ¼ ÑÑ‡ÐµÐ¹ÐºÑƒ ÑÐ¿Ð¸ÑÐºÐ°
 	int number;
 	string name;
 	NODE* next;
 };
 
-struct List { // Ñoçäàåì ãîëîâó ñïèñêà
+struct List { // Ð¡Ð¾Ð·Ð´Ð°ÐµÐ¼ Ð³Ð¾Ð»Ð¾Ð²Ñƒ ÑÐ¿Ð¸ÑÐºÐ°
 	int col;
 	NODE* first;
 };
 
-void push_beak(List* lst, int col) { // Ôóíêöèÿ äîáàâëåíèÿ íîâîé ñòðóêòóðû â ñïèñîê
+void push_beak(List* lst, int col) { // Ð¡Ð¾Ð·Ð´Ð°ÐµÐ¼ Ñ„ÑƒÐ½ÐºÑ†Ð¸ÑŽ Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ñ Ð½Ð¾Ð²Ð¾Ð¹ ÑÑ‡ÐµÐ¹ÐºÐ¸
 	string go;
 	NODE* node = new NODE;
 	node->number = col;
@@ -26,7 +26,7 @@ void push_beak(List* lst, int col) { // Ôóíêöèÿ äîáàâëåíèÿ íîâîé ñòðóêòóðû â ñïè
 	lst->col++;
 }
 
-void print(List* lst) { // Ôóíêöèÿ âûâîäà ëèñòà
+void print(List* lst) { // Ð¡Ð¾Ð·Ð´Ð°ÐµÐ¼ Ñ„ÑƒÐ½ÐºÑ†Ð¸ÑŽ Ð²Ñ‹Ð²Ð¾Ð´Ð° Ð²ÑÐµÑ… ÑÑ‡ÐµÐµÐº ÑÐ¿Ð¸ÑÐºÐ°
 	NODE* node = lst->first;
 	while (node != nullptr) {
 		cout << node->number << "\t" << node->name << endl;
