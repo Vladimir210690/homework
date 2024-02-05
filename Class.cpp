@@ -7,7 +7,7 @@ int main() {
 
     setlocale(LC_ALL, "RUS");
 
-    class People
+    class People // Create class people
     {
     public:
         string name;
