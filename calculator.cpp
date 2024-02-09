@@ -6,12 +6,9 @@ int main()
 
 {
 	setlocale(LC_ALL, "RUS");
-
 	char A = 0;
 	double B = 0;
 	double C = 0;
-	
-
 	while (A != 'o')
 	{
 		cout << "Выберите действие:  + , - , * , / и нажмите ввод, символ 'o' завершит операцию:  ";
@@ -19,7 +16,6 @@ int main()
 
 		switch (A)
 		{
-
 		case '+':
 
 			cout << "Введите первое число: ";
@@ -29,7 +25,6 @@ int main()
 
 			cout << "Результат: " << B + C << endl;
 			break;
-
 		case '-':
 
 			cout << "Введите первое число: ";
@@ -39,7 +34,6 @@ int main()
 
 			cout << "Результат: " << B - C << endl;
 			break;
-
 		case '*':
 
 			cout << "Введите первое число: ";
@@ -49,7 +43,6 @@ int main()
 
 			cout << "Результат: " << B * C << endl;
 			break;
-
 		case '/':
 
 			cout << "Введите первое число: ";
@@ -59,10 +52,7 @@ int main()
 
 			cout << "Результат: " << B / C << endl;
 			break;
-
-	
 		}
 	}
 	return 0;
-
 }
