@@ -57,5 +57,4 @@ int main()
 	cout << "Самое большое число: " << max << endl;
 
 	return 0;
-
 }
