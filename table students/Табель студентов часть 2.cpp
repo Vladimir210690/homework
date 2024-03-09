@@ -29,7 +29,7 @@ void Output(students idnumber[], const int SIZE) { // Вывод списка в
 
 int menu(int &select) { // Меню пользователя
 	cout << "Select the desired action: " << endl;
-	cout << "Creat student, Enter 1: " << endl;
+	cout << "Create student, Enter 1: " << endl;
 	cout << "Delete student, Enter 2: " << endl;
 	cout << "Show table students, Enter 3: " << endl;
 	cout << "Find the student with the highest grade point average, Enter 4: " << endl;
